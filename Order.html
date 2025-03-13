@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Cake Shop - Order</title>
+  <link rel="icon" href="Cake Shop.jpg" type="image/x-icon"> <!-- Favicon added here -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5dddd;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: #e591a0;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .back-button:hover {
+      background: #c75269;
+    }
+
+    .order-section {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #e8647c;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #678ac2;
+    }
+
+    select, input[type="date"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #e2a8b6;
+      border-radius: 5px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .price-box {
+      padding: 15px;
+      background-color: #e2a8b6;
+      border-radius: 5px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #e8647c;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #e8647c;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #f4d6d7;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #order-summary {
+      text-align: center;
+    }
+
+    footer {
+      width: 100%;
+      background-color: #f3cecf;
+      padding: 15px;
+      text-align: center;
+      color: rgb(0, 0, 0);
+      position: relative;
+      bottom: 0;
+      margin-top: 30px;
+    }
+    
+    footer p {
+      font-size: 14px;
+    }
+
+    footer a {
+            color: rgb(246, 122, 103);
+            text-decoration: none;
+            margin: 0 5px;
+        }
+  </style>
+</head>
+<body>
+
+  <a href="CakeShopNepal.html" class="back-button">←</a>
+
+  <div class="order-section">
+    <img src="Online Cake Shop.png" alt="Online Cake Shop Logo" style="height: 70px; margin-left: 250px;"> <!-- Logo added here -->
+    <h1>Order Your Cake</h1>
+
+    <form id="order-form" action="e-mailto:abc26@gmail.com" method="post" enctype="text/plain">
+      <label for="cake-type">Choose Cake Type:</label>
+      <select id="cake-type" name="cake-type" required>
+        <option value="black-forest-cake">Black Forest Cake</option>
+        <option value="white-forest-cake">White Forest Cake</option>
+        <option value="vanilla-cake">Vanilla Cake</option>
+        <option value="red-velvet-cake">Red Velvet Cake</option>
+        <option value="butterscotch-cake">Butterscotch Cake</option>
+        <option value="wedding-cake">Wedding Cake</option>
+        <option value="print-cake">Print Cake</option>
+        <option value="blueberry-cake">Blueberry Cake</option>
+        <option value="chocolate-cake">Chocolate Cake</option>
+        <option value="strawberry-cake">Strawberry Cake</option>
+        <option value="pineapple-cake">Pineapple Cake</option>
+      </select>
+
+      <label for="size">Choose Cake Size:</label>
+      <select id="size" name="size" required>
+        <option value="small">Single Deck</option>
+        <option value="medium">Double Deck</option>
+        <option value="large">Triple Deck</option>
+      </select>
+
+      <label for="weight">Choose Cake Weight (lbs):</label>
+      <select id="weight" name="weight" required>
+        <option value="2.2">1 lb</option>
+        <option value="4.4">2 lbs</option>
+        <option value="6.6">3 lbs</option>
+        <option value="8.8">4 lbs</option>
+        <option value="11">5 lbs</option>
+      </select>
+
+      <div class="price-box">
+        <p id="price">Price: NPR 0</p>
+      </div>
+
+      <label for="message">Personalized Message (optional):</label>
+      <textarea id="message" name="message" rows="4" placeholder="Enter a message for the cake (optional)"></textarea>
+
+      <label for="delivery-date">Delivery Date:</label>
+      <input type="date" id="delivery-date" name="delivery-date" required>
+
+      <label for="address">Delivery Address:</label>
+      <textarea id="address" name="address" rows="4" required placeholder="Enter delivery address"></textarea>
+
+      <button type="submit" id="submit-btn">Submit Order</button>
+    </form>
+
+    <div id="order-summary" class="hidden">
+      <h2>Your Order Summary:</h2>
+      <p><strong>Cake Type:</strong> <span id="summary-cake-type"></span></p>
+      <p><strong>Cake Size:</strong> <span id="summary-size"></span></p>
+      <p><strong>Cake Weight:</strong> <span id="summary-weight"></span></p>
+      <p><strong>Message:</strong> <span id="summary-message"></span></p>
+      <p><strong>Delivery Date:</strong> <span id="summary-delivery-date"></span></p>
+      <p><strong>Delivery Address:</strong> <span id="summary-address"></span></p>
+      <p><strong>Total Price:</strong> <span id="summary-price"></span></p>
+      <button onclick="window.location.reload()">Thank You!</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Online Cake Shop. All Rights Reserved.</p>
+    <p>Follow us on 
+        <a href="https://www.facebook.com/onlinecakeshop0">Facebook</a> | 
+        <a href="https://www.instagram.com/online_cake_shop_/">Instagram</a>
+    </p>
+  </footer>
+
+  <script>
+    const pricePerSize = {
+      small: 500,  // 500 NPR
+      medium: 1000, // 1000 NPR
+      large: 1500  // 1500 NPR
+    };
+
+    const pricePerLb = {
+      "black-forest-cake": 300, // 300 NPR per lb
+      "white-forest-cake": 400, // 400 NPR per lb
+      "vanilla-cake": 400,    // 400 NPR per lb
+      "red-velvet-cake": 600,  // 600 NPR per lb
+      "butterscotch-cake": 500, // 500 NPR per lb
+      "wedding-cake": 800,  // 800 NPR per lb
+      "print-cake": 550,  // 550 NPR per lb
+      "blueberry-cake": 450,  // 450 NPR per lb
+      "chocolate-cake": 500,  // 500 NPR per lb
+      "strawberry-cake": 500,  // 500 NPR per lb
+      "pineapple-cake": 400,  // 400 NPR per lb
+    };
+
+    function updatePrice() {
+      const cakeType = document.getElementById("cake-type").value;
+      const size = document.getElementById("size").value;
+      const weightInLbs = document.getElementById("weight").value;
+      const sizePrice = pricePerSize[size];
+      const weightPrice = pricePerLb[cakeType] * weightInLbs;
+      const totalPrice = sizePrice + weightPrice;
+      document.getElementById("price").textContent = `Price: NPR ${totalPrice}`;
+    }
+
+    document.getElementById("cake-type").addEventListener("change", updatePrice);
+    document.getElementById("size").addEventListener("change", updatePrice);
+    document.getElementById("weight").addEventListener("change", updatePrice);
+
+    document.getElementById("order-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // Disable submit button to prevent multiple submissions
+      document.getElementById("submit-btn").disabled = true;
+
+      // Get values from the form
+      const cakeType = document.getElementById("cake-type").value;
+      const size = document.getElementById("size").value;
+      const weightInLbs = document.getElementById("weight").value;
+      const message = document.getElementById("message").value;
+      const deliveryDate = document.getElementById("delivery-date").value;
+      const address = document.getElementById("address").value;
+      const sizePrice = pricePerSize[size];
+      const weightPrice = pricePerLb[cakeType] * weightInLbs;
+      const totalPrice = sizePrice + weightPrice;
+
+      // Set order summary
+      document.getElementById("summary-cake-type").textContent = cakeType.replace(/-/g, " ").toUpperCase();
+      document.getElementById("summary-size").textContent = size.charAt(0).toUpperCase() + size.slice(1);
+      document.getElementById("summary-weight").textContent = `${weightInLbs} lbs`;
+      document.getElementById("summary-message").textContent = message ? message : "No message.";
+      document.getElementById("summary-delivery-date").textContent = deliveryDate;
+      document.getElementById("summary-address").textContent = address;
+      document.getElementById("summary-price").textContent = `NPR ${totalPrice}`;
+
+      // Hide form and show summary
+      document.getElementById("order-form").classList.add("hidden");
+      document.getElementById("order-summary").classList.remove("hidden");
+    });
+
+    // Initialize the price on page load
+    updatePrice();
+  </script>
+
+</body>
+</html>
