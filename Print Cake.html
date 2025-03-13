@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <link rel="icon" href="Cake Shop.jpg" type="image/x-icon"> <!-- Favicon added here -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5dddd;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #e591a0;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .back-button:hover {
+            background: #c75269;
+        }
+
+        /* Logo at the top center */
+        .logo {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .logo img {
+            max-width: 75px; /* Adjust the size of the logo */
+            height: auto;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Creates a responsive grid */
+            gap: 15px;
+            width: 90%;
+            height: 80vh; /* Gallery fills up to 80% of the viewport */
+            padding: 30px;
+            box-sizing: border-box;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 4px solid #e8647c;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 1s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .gallery img:active {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        /* Fullscreen modal style */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .modal.active {
+            display: flex;
+        }
+
+        /* Footer style */
+        footer {
+            background: #f4d6d7;
+            color: rgb(0, 0, 0);
+            padding: 15px;
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        footer a {
+            color: rgb(246, 122, 103);
+            text-decoration: none;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo -->
+    <div class="logo">
+        <img src="Online Cake Shop.png" alt="Cake Shop Logo"> <!-- Replace with your logo image -->
+    </div>
+
+    <a href="menu.html" class="back-button">←</a>
+
+    <div class="gallery" id="imageContainer">
+        <img src="Print Cake.jpg" onclick="openModal(this)">
+        <img src="Print Cake 1.jpg" onclick="openModal(this)">
+        <img src="Print Cake 2.jpg" onclick="openModal(this)">
+        <img src="Print Cake 3.jpg" onclick="openModal(this)">
+        <img src="Print Cake 4.jpg" onclick="openModal(this)">
+    </div>
+
+    <!-- Modal for full-screen image -->
+    <div class="modal" id="modal">
+        <img id="modalImage" src="" alt="Full-screen image">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Online Cake Shop. All rights reserved.</p>
+        <p>Follow us on 
+            <a href="https://www.facebook.com/onlinecakeshop0">Facebook</a> | 
+            <a href="https://www.instagram.com/online_cake_shop_/">Instagram</a>
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let images = document.querySelectorAll(".gallery img");
+            images.forEach((img, index) => {
+                setTimeout(() => {
+                    img.style.opacity = "1";
+                    img.style.transform = "translateY(0)";
+                }, index * 200);
+            });
+        });
+
+        // Function to open the modal with the clicked image
+        function openModal(img) {
+            const modal = document.getElementById("modal");
+            const modalImage = document.getElementById("modalImage");
+            modalImage.src = img.src; // Set the modal image to the clicked image
+            modal.classList.add("active"); // Show the modal
+        }
+
+        // Close the modal when clicked
+        document.getElementById("modal").addEventListener("click", function () {
+            this.classList.remove("active"); // Hide the modal
+        });
+    </script>
+
+</body>
+</html>
