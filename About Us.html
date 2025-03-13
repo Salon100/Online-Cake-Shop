@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Sweet Bites</title>
+    <link rel="icon" href="Cake Shop.jpg" type="image/x-icon"> <!-- Favicon added here -->
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5dddd;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Logo Section */
+        .logo-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logo-section img {
+            max-width: 70px;
+            height: auto;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #e8647c;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #e591a0;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .back-button:hover {
+            background: #c75269;
+        }
+
+        /* About Section */
+        .about-section {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
+            background: #f0c4c6;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .about-section img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .about-section h2 {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .btn {
+            background: #e8647c;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #b54864;
+        }
+
+        .hidden-text {
+            display: none;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Team Section */
+        .slideshow-container {
+            position: relative;
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .team-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .team-slide {
+            display: flex;
+            justify-content: space-around;
+            min-width: 100%;
+        }
+
+        .card {
+            background-color: #f0c4c6;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 30%;
+        }
+
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #e8647c;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 5px;
+            margin: 10px;
+        }
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: #b54864;
+        }
+
+
+        /* Footer Section */
+        .footer {
+            background-color: #f4d6d7;
+            padding: 10px;
+            text-align: center;
+            color: rgb(0, 0, 0);
+        }
+
+        .footer a {
+            color: rgb(246, 122, 103);
+            text-decoration: none;
+            font-weight: normal;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="CakeShopNepal.html" class="back-button">←</a>
+
+    <!-- Logo Section -->
+    <div class="logo-section">
+        <img src="Online Cake Shop.png" alt="Sweet Bites Logo"> <!-- Replace "logo.png" with your logo file -->
+    </div>
+
+    <!-- About Us Section -->
+    <div class="about-section">
+        <h2>About Us</h2>
+
+        <!-- Main Bakery Image -->
+        <img src="Delicious Cake.jpg" alt="Delicious Cakes">
+        
+        <p>Welcome to <strong>Online Cake Shop</strong> – your one-stop destination for the most delicious and freshly baked cakes. We are a team of passionate bakers dedicated to bringing joy to your special occasions with our exquisite cakes.</p>
+        <p>At Online Cake Shop, we believe that every celebration deserves a sweet touch. Whether it's a birthday, wedding, or anniversary, our cakes are made with love and the finest ingredients to make your moments memorable.</p>
+        
+        <!-- Image of Baking Process -->
+        <img src="Cake Bake.jpg" alt="Baking Process">
+        
+        <p>Our bakery has been serving the community for many years, and during this time, we have perfected the art of baking. From classic flavors to innovative designs, we ensure that every cake not only tastes amazing but looks stunning too.</p>
+        <button class="btn" onclick="toggleText()">Show More</button>
+        <p class="hidden-text" id="moreText">
+            Our journey began with a passion for baking and a dream to bring smiles to people's faces through our creations. We started small, baking cakes for family and friends, and quickly realized that we had a gift for making sweet treats that people love.
+            <br><br>
+            As our reputation grew, we expanded our offerings, creating custom cakes that fit each client's unique vision. From intricate fondant designs to towering multi-tier cakes, we make sure that every cake is a work of art, carefully crafted to suit the theme of your event.
+            <br><br>
+
+            <!-- Image of Custom Cakes -->
+            <img src="Costum Cake.jpg" alt="Custom Cake">
+            <br><br>
+            At Online Cake Shop, we pride ourselves on using only the best ingredients. We source organic flour, premium chocolate, fresh fruits, and high-quality butter to ensure that our cakes are not only beautiful but delicious too. We also offer a variety of cake options, including vegan, gluten-free, and sugar-free choices, so everyone can indulge in a sweet treat.
+            <br><br>
+
+            <!-- Image of Happy Customers -->
+            <img src="Happy Customer.jpg" alt="Happy Customers">
+            <br><br>
+            Our team of skilled bakers and designers is committed to providing exceptional customer service and ensuring that every cake exceeds your expectations. We are here to make your special day even sweeter with a cake that’s as unique as you are.
+            <br><br>
+            Join us on this sweet journey, and let us be part of your most memorable moments!
+        </p>
+    </div>
+
+    <!-- Team Section with Slideshow -->
+    <div class="team-section">
+        <h2 style="color:#e57b8f; text-align: center;">Meet Our Team</h2>
+    
+        <div class="slideshow-container">
+            <div class="team-wrapper">
+                <div class="team-slide">
+                    <div class="card">
+                        <img src="Alvin.jpg" alt="Team Member 1">
+                        <h3>Alvin Magar</h3>
+                        <p>CEO & Founder</p>
+                    </div>
+                    <div class="card">
+                        <img src="Naren.jpg" alt="Team Member 2">
+                        <h3>Naren Bohara</h3>
+                        <p>Bakery Chief</p>
+                    </div>
+                    <div class="card">
+                        <img src="Merina.jpg" alt="Team Member 3">
+                        <h3>Merina Shrestha</h3>
+                        <p>Social Media Manager</p>
+                    </div>
+                </div>
+                <div class="team-slide">
+                    <div class="card">
+                        <img src="Mina.jpg" alt="Team Member 4">
+                        <h3>Mina Lama</h3>
+                        <p>Marketing Manager</p>
+                    </div>
+                    <div class="card">
+                        <img src="Pritha.jpg" alt="Team Member 5">
+                        <h3>Pritha</h3>
+                        <p>Delivery Boy</p>
+                    </div>
+                   
+                </div>
+            </div>
+            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="next" onclick="changeSlide(1)">&#10095;</button>
+        </div>
+    </div>
+
+
+
+    <!-- JavaScript for Read More Button -->
+    <script>
+        function toggleText() {
+            const moreText = document.getElementById('moreText');
+            const btn = document.querySelector('.btn');
+            if (moreText.style.display === "none") {
+                moreText.style.display = "block";
+                btn.textContent = "Show Less";
+            } else {
+                moreText.style.display = "none";
+                btn.textContent = "Show More";
+            }
+        }
+
+    let slideIndex = 0;
+
+    function changeSlide(step) {
+        let slides = document.querySelectorAll(".team-slide");
+        let wrapper = document.querySelector(".team-wrapper");
+        slideIndex += step;
+        if (slideIndex >= slides.length) { slideIndex = 0; }
+        if (slideIndex < 0) { slideIndex = slides.length - 1; }
+        wrapper.style.transform = `translateX(-${slideIndex * 100}%)`;
+    }// Start the slideshow automatically
+    </script>
+
+ <!-- Footer Section -->
+ <div class="footer">
+    <p>&copy; 2025 Online Cake Shop. All rights reserved. </p>
+    <p>Follow us on 
+        <a href="https://www.facebook.com/onlinecakeshop0">Facebook</a> | 
+        <a href="https://www.instagram.com/online_cake_shop_/">Instagram</a>
+    </p>
+</div>
+
+</body>
+</html>
