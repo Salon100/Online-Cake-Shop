@@ -63,6 +63,23 @@
             color: #dd4964;
         }
 
+        /* Button Style for Cake Names */
+        button.cake-name-btn {
+            background-color: #e591a0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        button.cake-name-btn:hover {
+            background-color: #c75269;
+        }
+
         /* Footer Section */
         footer {
             background: #f4d6d7;
@@ -99,7 +116,7 @@
 </head>
 <body>
 
-    <a href="index.html" class="back-button">←</a> 
+    <a href="CakeShopNepal.html" class="back-button">←</a> 
 
     <img src="Online Cake Shop.png" alt="Online Cake Shop Logo" style="height: 70px; margin-right: center; "> <!-- Logo added here -->
    
@@ -125,17 +142,17 @@
 
     <script>
         const cakes = [
-            { name: "Black Forest Cake", img: "Black Forest Cake.jpg" },
-            { name: "White Forest Cake",  img: "White Forest Cake.jpg" },
-            { name: "Vanilla Cake",  img: "Vanilla Cake.jpg" },
-            { name: "Red Velvet Cake",  img: "Red Velvet Cake.jpg" },
-            { name: "Butterscotch Cake",  img: "Butterscotch Cake.jpg" },
-            { name: "Wedding Cake",  img: "Wedding Cake.jpg"},
-            { name: "Print Cake", img: "Print Cake.jpg" },
-            { name: "Blueberry Cake", img: "Blueberry Cake.jpg" },
-            { name: "Chocolate Cake", img: "Chocolate Cake.jpg" },
-            { name: "Strawberry Cake", img: "Strawberry Cake.jpg" },
-            { name: "Pineapple Cake", img: "Pineapple Cake.jpg" }
+            { name: "Black Forest Cake", img: "Black Forest Cake.jpg", page: "Black Forest Cake.html" },
+            { name: "White Forest Cake",  img: "White Forest Cake.jpg", page: "White Forest Cake.html" },
+            { name: "Vanilla Cake",  img: "Vanilla Cake.jpg", page: "Vanilla Cake.html" },
+            { name: "Red Velvet Cake",  img: "Red Velvet Cake.jpg", page: "Red Velvet Cake.html" },
+            { name: "Butterscotch Cake",  img: "Butterscotch Cake.jpg", page: "Butterscotch Cake.html" },
+            { name: "Wedding Cake",  img: "wedding cake.jpg", page: "Wedding Cake.html" },
+            { name: "Print Cake", img: "Print Cake.jpg", page: "Print Cake.html" },
+            { name: "Blueberry Cake", img: "Blueberry Cake.jpg", page: "Blueberry Cake.html" },
+            { name: "Chocolate Cake", img: "Chocolate Cake.jpg", page: "Chocolate Cake.html" },
+            { name: "Strawberry Cake", img: "Strawberry Cake.jpg", page: "Strawberry Cake.html" },
+            { name: "Pineapple Cake", img: "Pineapple Cake.jpg", page: "Pineapple Cake.html" }
         ];
 
         const menuContainer = document.getElementById("menu-container");
@@ -147,7 +164,9 @@
             cakeItem.classList.add("cake-item");
             cakeItem.innerHTML = `
                 <img src="${cake.img}" alt="${cake.name}" onclick="openFullScreen('${cake.img}')">
-                <h3>${cake.name}</h3>
+                <a href="${cake.page}">
+                    <button class="cake-name-btn">${cake.name}</button>
+                </a>
             `;
             menuContainer.appendChild(cakeItem);
         });
