@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Cake Shop - Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f5dddd;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #e591a0;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .back-button:hover {
+            background: #c75269;
+        }
+
+        .menu {
+            padding: 20px;
+        }
+        .menu-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .cake-item {
+            background: #f3c6c7;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 220px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+        .cake-item:hover {
+            transform: scale(1.05);
+        }
+        .cake-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        h2, h3 {
+            color: #dd4964;
+        }
+
+        /* Footer Section */
+        footer {
+            background: #f4d6d7;
+            color: rgb(0, 0, 0);
+            padding: 15px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        footer a {
+            color: rgb(246, 122, 103);
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+         /* Full-screen image styles */
+         .fullscreen-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .fullscreen-container img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="CakeShopNepal.html" class="back-button">←</a> 
+
+    <img src="Online Cake Shop.png" alt="Online Cake Shop Logo" style="height: 70px; margin-right: center; "> <!-- Logo added here -->
+   
+    <section class="menu">
+        <h2>Our Delicious Cakes</h2>
+        <div class="menu-container" id="menu-container">
+            <!-- Cakes will be loaded here dynamically -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Online Cake Shop. All rights reserved.</p>
+        <p>Follow us on 
+            <a href="https://www.facebook.com/onlinecakeshop0">Facebook</a> | 
+            <a href="https://www.instagram.com/online_cake_shop_/">Instagram</a>
+        </p>
+    </footer>
+
+ <!-- Full-screen image container -->
+ <div class="fullscreen-container" id="fullscreen-container">
+    <img id="fullscreen-image" src="" alt="">
+</div>
+
+    <script>
+        const cakes = [
+            { name: "Black Forest Cake", img: "Black Forest Cake.jpg" },
+            { name: "White Forest Cake",  img: "White Forest Cake.jpg" },
+            { name: "Vanilla Cake",  img: "Vanilla Cake.jpg" },
+            { name: "Red Velvet Cake",  img: "Red Velvet Cake.jpg" },
+            { name: "Butterscotch Cake",  img: "Butterscotch Cake.jpg" },
+            { name: "Wedding Cake",  img: "wedding cake.jpg"},
+            { name: "Print Cake", img: "Print Cake.jpg" },
+            { name: "Blueberry Cake", img: "Blueberry Cake.jpg" },
+            { name: "Chocolate Cake", img: "Chocolate Cake.jpg" },
+            { name: "Strawberry Cake", img: "Strawberry Cake.jpg" },
+            { name: "Pineapple Cake", img: "Pineapple Cake.jpg" }
+        ];
+
+        const menuContainer = document.getElementById("menu-container");
+        const fullscreenContainer = document.getElementById("fullscreen-container");
+        const fullscreenImage = document.getElementById("fullscreen-image");
+
+        cakes.forEach(cake => {
+            const cakeItem = document.createElement("div");
+            cakeItem.classList.add("cake-item");
+            cakeItem.innerHTML = `
+                <img src="${cake.img}" alt="${cake.name}" onclick="openFullScreen('${cake.img}')">
+                <h3>${cake.name}</h3>
+            `;
+            menuContainer.appendChild(cakeItem);
+        });
+
+        // Function to open image in full screen
+        function openFullScreen(imgSrc) {
+            fullscreenImage.src = imgSrc;
+            fullscreenContainer.style.display = "flex";
+        }
+
+        // Close full-screen image when clicking anywhere
+        fullscreenContainer.addEventListener("click", () => {
+            fullscreenContainer.style.display = "none";
+        });
+    </script>
+</body>
+</html>
