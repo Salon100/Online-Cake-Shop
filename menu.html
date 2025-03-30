@@ -27,6 +27,7 @@
             text-decoration: none;
             transition: background 0.3s;
         }
+
         .back-button:hover {
             background: #c75269;
         }
@@ -34,12 +35,14 @@
         .menu {
             padding: 20px;
         }
+
         .menu-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
         }
+
         .cake-item {
             background: #f3c6c7;
             padding: 15px;
@@ -49,9 +52,11 @@
             text-align: center;
             transition: transform 0.3s ease-in-out;
         }
+
         .cake-item:hover {
             transform: scale(1.05);
         }
+
         .cake-item img {
             width: 100%;
             height: auto;
@@ -59,24 +64,32 @@
             border-radius: 8px;
             cursor: pointer;
         }
+
         h2, h3 {
             color: #dd4964;
         }
 
+        /* Flexbox layout for buttons side by side */
+        .cake-item .button-container {
+            display: flex;
+            justify-content: center;  /* Centers the buttons horizontally */
+            gap: 10px;  /* Adds space between the buttons */
+            margin-top: 10px;  /* Optional, adds space above buttons */
+        }
+
         /* Button Style for Cake Names */
-        button.cake-name-btn {
-            background-color: #e591a0;
+        button.cake-name-btn, button.buy-btn {
+            background-color: #e9607a;
             color: white;
             border: none;
             padding: 10px 20px;
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
             transition: background-color 0.3s;
         }
 
-        button.cake-name-btn:hover {
+        button.cake-name-btn:hover, button.buy-btn:hover {
             background-color: #c75269;
         }
 
@@ -88,14 +101,15 @@
             text-align: center;
             margin-top: 20px;
         }
+
         footer a {
             color: rgb(246, 122, 103);
             text-decoration: none;
             margin: 0 5px;
         }
 
-         /* Full-screen image styles */
-         .fullscreen-container {
+        /* Full-screen image styles */
+        .fullscreen-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -107,19 +121,40 @@
             align-items: center;
             z-index: 1000;
         }
+
         .fullscreen-container img {
             max-width: 90%;
             max-height: 90%;
             border-radius: 10px;
         }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 20px;
+            border: none;
+            border-radius: 50%;
+            padding: 5px 10px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .cake-item {
+                width: 150px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-button">←</a> 
+    <a href="CakeShopNepal.html" class="back-button">←</a> 
 
-    <img src="Online Cake Shop.png" alt="Online Cake Shop Logo" style="height: 70px; margin-right: center; "> <!-- Logo added here -->
-   
+    <img src="Online Cake Shop.png" alt="Online Cake Shop Logo" style="height: 70px; margin-right: center;"> <!-- Logo added here -->
+
     <section class="menu">
         <h2>Our Delicious Cakes</h2>
         <div class="menu-container" id="menu-container">
@@ -133,27 +168,27 @@
             <a href="https://www.facebook.com/onlinecakeshop0">Facebook</a> | 
             <a href="https://www.instagram.com/online_cake_shop_/">Instagram</a>
         </p>
-        <p> Samakhusi, Kathmandu </p>
     </footer>
 
- <!-- Full-screen image container -->
- <div class="fullscreen-container" id="fullscreen-container">
-    <img id="fullscreen-image" src="" alt="">
-</div>
+    <!-- Full-screen image container -->
+    <div class="fullscreen-container" id="fullscreen-container">
+        <button class="close-btn" onclick="closeFullScreen()">X</button>
+        <img id="fullscreen-image" src="" alt=""/>
+    </div>
 
     <script>
         const cakes = [
-            { name: "Black Forest Cake", img: "Black Forest Cake.jpg", page: "Black Forest Cake.html" },
-            { name: "White Forest Cake",  img: "White Forest Cake.jpg", page: "White Forest Cake.html" },
-            { name: "Vanilla Cake",  img: "Vanilla Cake.jpg", page: "Vanilla Cake.html" },
-            { name: "Red Velvet Cake",  img: "Red Velvet Cake.jpg", page: "Red Velvet Cake.html" },
-            { name: "Butterscotch Cake",  img: "Butterscotch Cake.jpg", page: "Butterscotch Cake.html" },
-            { name: "Wedding Cake",  img: "Wedding Cake.jpg", page: "Wedding Cake.html" },
-            { name: "Print Cake", img: "Print Cake.jpg", page: "Print Cake.html" },
-            { name: "Blueberry Cake", img: "Blueberry Cake.jpg", page: "Blueberry Cake.html" },
-            { name: "Chocolate Cake", img: "Chocolate Cake.jpg", page: "Chocolate Cake.html" },
-            { name: "Strawberry Cake", img: "Strawberry Cake.jpg", page: "Strawberry Cake.html" },
-            { name: "Pineapple Cake", img: "Pineapple Cake.jpg", page: "Pineapple Cake.html" }
+            { name: "Black Forest Cake", img: "Black Forest Cake.jpg", page: "Black Forest Cake.html", buyPage: "Black Forest Cake Checkout.html", description: "Delicious chocolate cake with cherries." },
+            { name: "White Forest Cake", img: "White Forest Cake.jpg", page: "White Forest Cake.html", buyPage: "White Forest Cake Checkout.html", description: "A lighter version of the Black Forest cake with whipped cream." },
+            { name: "Vanilla Cake", img: "Vanilla Cake.jpg", page: "Vanilla Cake.html", buyPage: "Vanilla Cake Checkout.html", description: "Classic vanilla cake with a smooth buttercream." },
+            { name: "Red Velvet Cake", img: "Red Velvet Cake.jpg", page: "Red Velvet Cake.html", buyPage: "Red Velvet Cake Checkout.html", description: "Rich, moist, and beautifully red with cream cheese frosting." },
+            { name: "Butterscotch Cake", img: "Butterscotch Cake.jpg", page: "Butterscotch Cake.html", buyPage: "Butterscotch Cake Checkout.html", description: "Buttery and caramel-flavored cake with a crunchy topping." },
+            { name: "Wedding Cake", img: "wedding cake.jpg", page: "Wedding Cake.html", buyPage: "Wedding Cake Checkout.html", description: "Elegant multi-tier cake perfect for weddings." },
+            { name: "Print Cake", img: "Print Cake.jpg", page: "Print Cake.html", buyPage: "Print Cake Checkout.html", description: "A custom cake with your image printed on it." },
+            { name: "Blueberry Cake", img: "Blueberry Cake.jpg", page: "Blueberry Cake.html", buyPage: "Blueberry Cake Checkout.html", description: "Fresh blueberry-infused cake with cream." },
+            { name: "Chocolate Cake", img: "Chocolate Cake.jpg", page: "Chocolate Cake.html", buyPage: "Chocolate Cake Checkout.html", description: "Decadent chocolate cake with layers of ganache." },
+            { name: "Strawberry Cake", img: "Strawberry Cake.jpg", page: "Strawberry Cake.html", buyPage: "Strawberry Cake Checkout.html", description: "Delightful cake with fresh strawberries and cream." },
+            { name: "Pineapple Cake", img: "Pineapple Cake.jpg", page: "Pineapple Cake.html", buyPage: "Pineapple Cake Checkout.html", description: "A refreshing pineapple-flavored cake with cream." }
         ];
 
         const menuContainer = document.getElementById("menu-container");
@@ -165,23 +200,28 @@
             cakeItem.classList.add("cake-item");
             cakeItem.innerHTML = `
                 <img src="${cake.img}" alt="${cake.name}" onclick="openFullScreen('${cake.img}')">
-                <a href="${cake.page}">
-                    <button class="cake-name-btn">${cake.name}</button>
-                </a>
+                <h3>${cake.name}</h3>
+                <p>${cake.description}</p>
+                <div class="button-container">
+                    <a href="${cake.page}">
+                        <button class="cake-name-btn">View Details</button>
+                    </a>
+                    <a href="${cake.buyPage}">
+                        <button class="buy-btn">🛒</button>
+                    </a>
+                </div>
             `;
             menuContainer.appendChild(cakeItem);
         });
 
-        // Function to open image in full screen
         function openFullScreen(imgSrc) {
             fullscreenImage.src = imgSrc;
             fullscreenContainer.style.display = "flex";
         }
 
-        // Close full-screen image when clicking anywhere
-        fullscreenContainer.addEventListener("click", () => {
+        function closeFullScreen() {
             fullscreenContainer.style.display = "none";
-        });
+        }
     </script>
 </body>
 </html>
