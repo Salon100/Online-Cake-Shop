@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Cake Shop</title>
-    <link rel="icon" href="Cake Shop.jpg" type="image/x-icon"> <!-- Favicon added here -->
+    <link rel="icon" href="Cake Shop.jpg" type="image/x-icon">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            text-align: center;
             background-color: #f5dddd;
+            text-align: center;
         }
         header {
             background: #f5dddd;
@@ -34,20 +34,131 @@
         nav ul li a:hover {
             color: #ec4261;
         }
-        section {
-            padding: 20px;
-        }
         .hero {
-            background: url('Cake Banner.jpg') no-repeat center center/cover;
+            background: url('Online Cake Shop Banner.jpg') no-repeat center center/cover;
             color: #1B1212;
-            padding: 100px 20px;
+            padding: 300px;
             background-color: #e5b3bf;
         }
-        .hero h2 {
-            font-size: 2.5em;
+
+        /* Slideshow Container */
+        .slideshow-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
         }
-        .hero p {
-            font-size: 1.2em;
+
+        .slides {
+            display: flex;
+            width: 100%;
+            animation: slideLoop 30s linear infinite; /* Infinite loop animation */
+        }
+
+        .slide {
+            flex: 0 0 250px; /* Adjust the width of each slide */
+            height: 350px;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide:hover {
+            transform: scale(1.1);
+        }
+
+        /* Infinite Loop animation */
+        @keyframes slideLoop {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%); /* Move all slides to the left */
+            }
+        }
+
+        /*images section*/
+        .image-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .image-container img {
+            width: auto; /* Adjust image size */
+            height: 250px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.1);
+        }
+
+        .extra-images {
+            display: none; /* Initially hidden */
+            gap: 20px;
+        }
+
+        .section {
+            position: relative; /* Make the section the reference for positioning */
+            margin-bottom: 20px; /* Add some space below each section */
+        }
+        
+        .see-more-button {
+            background-color: #ee7c91;
+            color: #000000;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 100px;
+            cursor: pointer;
+            position: absolute; /* Position the button absolutely within the section */
+            top: 10px; /* Adjust distance from the top */
+            right: 10px; /* Adjust distance from the right */
+            z-index: 10; /* Ensure it appears above other elements */
+        }
+        
+        .see-more-button:hover {
+            background-color: #f5dddd;
+        }
+        
+        
+        /* Fullscreen Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+
+        .modal-content {
+            display: block;
+            margin: auto;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
         }
 
         /* Footer Section */
@@ -65,34 +176,11 @@
             text-decoration: none;
             margin: 0 5px;
         }
-
-        /* Hover effect on images */
-        .hover-image {
-            width: 200px;
-            height: auto;
-            margin: 20px;
-            border-radius: 10px;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .hover-image:hover {
-            transform: scale(1.1); /* Make the image scale when hovered */
-        }
-
-        /* Flexbox to position images */
-        .image-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
     </style>
 </head>
 <body>
     <header>
-
-        <img src="Online Cake Shop.png" alt="Online Cake Shop Logo" style="height: 70px; margin-right: center; "> <!-- Logo added here -->
-        
+        <img src="Online Cake Shop.png" alt="Online Cake Shop Logo" style="height: 70px;"> <!-- Logo -->
         <h1>Welcome to Online Cake Shop</h1>
         <nav>
             <ul>
@@ -106,15 +194,209 @@
     </header>
 
     <section class="hero">
-        
+        <!-- Hero section content -->
     </section>
 
-    <section class="image-container">
-        <!-- Add images with hover effect -->
-        <img src="cake1.jpg" alt="Cake 1" class="hover-image">
-        <img src="cake2.jpg" alt="Cake 2" class="hover-image">
-        <img src="cake3.jpg" alt="Cake 3" class="hover-image">
+    <section class="slideshow-container">
+        <div class="slides">
+            <img class="slide" src="cake1.jpg" alt="Cake 1" onclick="openFullScreen(this)">
+            <img class="slide" src="cake2.jpg" alt="Cake 2" onclick="openFullScreen(this)">
+            <img class="slide" src="cake3.jpg" alt="Cake 3" onclick="openFullScreen(this)">
+            <img class="slide" src="cake4.jpg" alt="Cake 4" onclick="openFullScreen(this)">
+            <img class="slide" src="cake5.jpg" alt="Cake 5" onclick="openFullScreen(this)">
+            <img class="slide" src="cake6.jpg" alt="Cake 6" onclick="openFullScreen(this)">
+            <img class="slide" src="cake7.jpg" alt="Cake 7" onclick="openFullScreen(this)">
+            <img class="slide" src="cake8.jpg" alt="Cake 8" onclick="openFullScreen(this)">
+            <img class="slide" src="cake9.jpg" alt="Cake 9" onclick="openFullScreen(this)">
+            <img class="slide" src="cake10.jpg" alt="Cake 10" onclick="openFullScreen(this)">
+            <img class="slide" src="cake11.jpg" alt="Cake 11" onclick="openFullScreen(this)">
+            <img class="slide" src="cake12.jpg" alt="Cake 12" onclick="openFullScreen(this)">
+        </div>
     </section>
+
+    <hr>
+
+   <!-- Section Black Forest Cake -->
+    <div class="section" id="Black-Forest-Cake-section">
+        <h2>Black Forest Cake</h2>
+        <div class="image-container">
+            <img src="Black Forest Cake.jpg" alt="Black Forest Cake">
+            <img src="Black Forest Cake 1.jpg" alt="Black Forest Cake 1">
+            <img src="Black Forest Cake 2.jpg" alt="Black Forest Cake 2">
+            <span class="extra-images">
+                <img src="Black Forest Cake 3.jpg" alt="Black Forest Cake 3">
+                <img src="Black Forest Cake 4.jpg" alt="Black Forest Cake 4">
+                <img src="Black Forest Cake 1.jpg" alt="Black Forest Cake 5">
+            </span>
+        </div>
+        <button class="see-more-button" onclick="toggleImages('Black-Forest-Cake-section', this)">See More →</button>
+    </div>
+
+    <hr>
+
+  <!-- Section White Forest Cake -->
+    <div class="section" id="White-Forest-Cake-section">
+        <h2>White Forest Cake</h2>
+        <div class="image-container">
+            <img src="White Forest Cake.jpg" alt="White Forest Cake">
+            <img src="White Forest Cake 1.jpg" alt="White Forest Cake 1">
+            <img src="White Forest Cake 2.jpg" alt="White Forest Cake 2">
+            <span class="extra-images">
+                <img src="White Forest Cake 3.jpg" alt="White Forest Cake 3">
+                <img src="White Forest Cake 4.jpg" alt="White Forest Cake 4">
+                <img src="White Forest Cake 1.jpg" alt="White Forest Cake 5">
+            </span>
+        </div>
+        <button class="see-more-button" onclick="toggleImages('White-Forest-Cake-section', this)">See More →</button>
+    </div>
+
+        
+    <hr>
+
+     <!-- Section Vanilla Cake -->
+    <div class="section" id="Vanilla-Cake-section">
+        <h2>Vanilla Cake</h2>
+        <div class="image-container">
+            <img src="Vanilla Cake.jpg" alt="Vanilla Cake">
+            <img src="Vanilla Cake 1.jpg" alt="Vanilla Cake 1">
+            <img src="Vanilla Cake 2.jpg" alt="Vanilla Cake 2">
+            <span class="extra-images">
+                <img src="Vanilla Cake 3.jpg" alt="Vanilla Cake 3">
+                <img src="Vanilla Cake 4.jpg" alt="Vanilla Cake 4">
+                <img src="Vanilla Cake 1.jpg" alt="Vanilla Cake 5">
+            </span>
+        </div>
+        <button class="see-more-button" onclick="toggleImages('Vanilla-Cake-section', this)">See More →</button>
+    </div>
+
+    <hr>
+
+    
+     <!-- Section Red Velvet Cake -->
+     <div class="section" id="Red-Velvet-Cake-section">
+        <h2>Red Velvet Cake</h2>
+        <div class="image-container">
+            <img src="Red Velvet Cake.jpg" alt="Red Velvet Cake">
+            <img src="Red Velvet Cake 1.jpg" alt="Red Velvet Cake 1">
+            <img src="Red Velvet Cake 2.jpg" alt="Red Velvet Cake 2">
+            <span class="extra-images">
+                <img src="Red Velvet Cake 3.jpg" alt="Red Velvet Cake 3">
+                <img src="Red Velvet Cake 4.jpg" alt="Red Velvet Cake 4">
+                <img src="Red Velvet Cake 1.jpg" alt="Red Velvet Cake 5">
+            </span>
+        </div>
+        <button class="see-more-button" onclick="toggleImages('Red-Velvet-Cake-section', this)">See More →</button>
+    </div>
+
+    <hr>
+
+     <!-- Section Butterscotch Cake -->
+     <div class="section" id="Butterscotch-Cake-section">
+        <h2>Butterscotch Cake</h2>
+        <div class="image-container">
+            <img src="Butterscotch Cake.jpg" alt="Butterscotch Cake">
+            <img src="Butterscotch Cake 1.jpg" alt="Butterscotch Cake 1">
+            <img src="Butterscotch Cake 2.jpg" alt="Butterscotch Cake 2">
+            <span class="extra-images">
+                <img src="Butterscotch Cake 3.jpg" alt="Butterscotch Cake 3">
+                <img src="Butterscotch Cake 4.jpg" alt="Butterscotch Cake 4">
+                <img src="Butterscotch Cake 1.jpg" alt="Butterscotch Cake 5">
+            </span>
+        </div>
+        <button class="see-more-button" onclick="toggleImages('Butterscotch-Cake-section', this)">See More →</button>
+    </div>
+
+    <hr>
+
+     <!-- Section Wedding Cake -->
+     <div class="section" id="Wedding-Cake-section">
+        <h2>Wedding Cake</h2>
+        <div class="image-container">
+            <img src="Wedding Cake.jpg" alt="Wedding Cake">
+            <img src="Wedding Cake 1.jpg" alt="Weddign Cake 1">
+            <img src="Wedding Cake 2.jpg" alt="Wedding Cake 2">
+            <span class="extra-images">
+                <img src="Wedding Cake 3.jpg" alt="Wedding Cake 3">
+                <img src="Wedding Cake 4.jpg" alt="Wedding Cake 4">
+                <img src="Wedding Cake 1.jpg" alt="Wedding Cake 5">
+            </span>
+        </div>
+        <button class="see-more-button" onclick="toggleImages('Wedding-Cake-section', this)">See More →</button>
+    </div>
+
+    <hr>
+
+     <!-- Section Print Cake -->
+     <div class="section" id="Print-Cake-section">
+        <h2>Print Cake</h2>
+        <div class="image-container">
+            <img src="Print Cake.jpg" alt="Print Cake">
+            <img src="Print Cake 1.jpg" alt="Print Cake 1">
+            <img src="Print Cake 2.jpg" alt="Print Cake 2">
+            <span class="extra-images">
+                <img src="Print Cake 3.jpg" alt="Print Cake 3">
+                <img src="Print Cake 4.jpg" alt="Print Cake 4">
+                <img src="Print Cake 1.jpg" alt="Print Cake 5">
+            </span>
+        </div>
+        <button class="see-more-button" onclick="toggleImages('Print-Cake-section', this)">See More →</button>
+    </div>
+
+    <hr>
+
+    <!-- Section Chocolate Cake -->
+     <div class="section" id="Chocolate-Cake-section">
+        <h2>Chocolate Cake</h2>
+        <div class="image-container">
+            <img src="Chocolate Cake.jpg" alt="Chocolate Cake">
+            <img src="Chocolate Cake 1.jpg" alt="Chocolate Cake 1">
+            <img src="Chocolate Cake 2.jpg" alt="Chocolate Cake 2">
+            <span class="extra-images">
+                <img src="Chocolate Cake 3.jpg" alt="Chocolate Cake 3">
+                <img src="Chocolate Cake 4.jpg" alt="Chocolate Cake 4">
+                <img src="Chocolate Cake 1.jpg" alt="Chocolate Cake 5">
+            </span>
+        </div>
+        <button class="see-more-button" onclick="toggleImages('Chocolate-Cake-section', this)">See More →</button>
+    </div>
+
+    <hr>
+
+    <!-- Section Strawberry Cake -->
+    <div class="section" id="Strawberry-Cake-section">
+        <h2>Strawberry Cake</h2>
+        <div class="image-container">
+            <img src="Strawberry Cake.jpg" alt="Strawberry Cake">
+            <img src="Strawberry Cake 1.jpg" alt="Strawberry Cake 1">
+            <img src="Strawberry Cake 2.jpg" alt="Strawberry Cake 2">
+            <span class="extra-images">
+                <img src="Strawberry Cake 3.jpg" alt="Strawberry Cake 3">
+                <img src="Strawberry Cake 4.jpg" alt="Strawberry Cake 4">
+                <img src="Strawberry Cake 1.jpg" alt="Strawberry Cake 5">
+            </span>
+        </div>
+        <button class="see-more-button" onclick="toggleImages('Strawberry-Cake-section', this)">See More →</button>
+    </div>
+
+    <hr>
+
+    <!-- Section Pineapple Cake -->
+    <div class="section" id="Pineapple-Cake-section">
+        <h2>Pineapple Cake</h2>
+        <div class="image-container">
+            <img src="Pineapple Cake.jpg" alt="Pineapple Cake">
+            <img src="Pineapple Cake 1.jpg" alt="Pineapple Cake 1">
+            <img src="Pineapple Cake 2.jpg" alt="Pineapple Cake 2">
+            <span class="extra-images">
+                <img src="Pineapple Cake 3.jpg" alt="Pineapple Cake 3">
+                <img src="Pineapple Cake 4.jpg" alt="Pineapple Cake 4">
+                <img src="Pineapple Cake 1.jpg" alt="Pineapple Cake 5">
+            </span>
+        </div>
+        <button class="see-more-button" onclick="toggleImages('Pineapple-Cake-section', this)">See More →</button>
+    </div>
+
+    <hr>
 
     <footer>
         <p>&copy; 2025 Online Cake Shop. All rights reserved.</p>
@@ -124,5 +406,73 @@
         </p>
         <p> Samakhusi, Kathmandu </p>
     </footer>
+
+    <!-- Fullscreen Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        function openFullScreen(img) {
+            const fullScreenDiv = document.createElement('div');
+            fullScreenDiv.style.position = 'fixed';
+            fullScreenDiv.style.top = '0';
+            fullScreenDiv.style.left = '0';
+            fullScreenDiv.style.width = '100vw';
+            fullScreenDiv.style.height = '100vh';
+            fullScreenDiv.style.background = 'rgba(0, 0, 0, 0.8)';
+            fullScreenDiv.style.display = 'flex';
+            fullScreenDiv.style.alignItems = 'center';
+            fullScreenDiv.style.justifyContent = 'center';
+            fullScreenDiv.style.zIndex = '1000';
+            fullScreenDiv.onclick = () => document.body.removeChild(fullScreenDiv);
+            
+            const fullScreenImg = document.createElement('img');
+            fullScreenImg.src = img.src;
+            fullScreenImg.style.maxWidth = '90%';
+            fullScreenImg.style.maxHeight = '90%';
+            
+            fullScreenDiv.appendChild(fullScreenImg);
+            document.body.appendChild(fullScreenDiv);
+        }
+
+        function toggleImages(sectionId, button) {
+            const section = document.getElementById(sectionId);
+            const extraImages = section.querySelector('.extra-images');
+        
+            // Toggle display of extra images
+            if (extraImages.style.display === 'none' || extraImages.style.display === '') {
+                extraImages.style.display = 'inline-flex';  // Show extra images
+                button.textContent = 'See Less ←';  // Change button text
+            } else {
+                extraImages.style.display = 'none';  // Hide extra images
+                button.textContent = 'See More →';  // Reset button text
+            }
+        }
+        
+        // Fullscreen Image Click Event
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        const closeBtn = document.querySelector(".close");
+
+        document.querySelectorAll('.image-container img').forEach(img => {
+            img.addEventListener('click', function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            });
+        });
+
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        };
+
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+        
+    </script>
 </body>
 </html>
