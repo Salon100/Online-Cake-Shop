@@ -6,7 +6,7 @@
   <title>Chocolate Cake Order</title>
   <link rel="icon" href="Cake Shop.jpg" type="image/x-icon"> <!-- Favicon added here -->
   <style>
-    * {
+     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -139,7 +139,12 @@
     <img src="Online Cake Shop.png" alt="Online Cake Shop Logo" style="height: 70px; margin-left: 250px;"> <!-- Logo added here -->
     <h1>Order Your Chocolate Cake</h1>
 
-    <form id="order-form" action="mailto:abc26@gmail.com" method="post" enctype="text/plain">
+    <form id="order-form" action="#" method="post">
+      <label for="cake-type">Choose Cake Type:</label>
+      <select id="cake-type" name="cake-type" required>
+        <option value="chocolate">Chocolate Cake</option>
+      </select>
+
       <label for="size">Choose Cake Size:</label>
       <select id="size" name="size" required>
         <option value="small">Single Deck</option>
@@ -149,13 +154,7 @@
 
       <label for="weight">Choose Cake Weight (lbs):</label>
       <select id="weight" name="weight" required>
-        <option value="2.2">1 lb</option>
-        <option value="4.4">2 lbs</option>
-        <option value="6.6">3 lbs</option>
-        <option value="8.8">4 lbs</option>
-        <option value="11">5 lbs</option>
-        <option value="13.2">6 lbs</option>
-        <option value="15.4">7 lbs</option>
+        <!-- Options will be populated dynamically -->
       </select>
 
       <div class="price-box">
@@ -179,6 +178,7 @@
 
     <div id="order-summary" class="hidden">
       <h2>Your Order Summary:</h2>
+      <p><strong>Cake Type:</strong> <span id="summary-cake-type"></span></p>
       <p><strong>Cake Size:</strong> <span id="summary-size"></span></p>
       <p><strong>Cake Weight:</strong> <span id="summary-weight"></span></p>
       <p><strong>Message:</strong> <span id="summary-message"></span></p>
@@ -194,8 +194,10 @@
     <p>&copy; 2025 Online Cake Shop. All Rights Reserved.</p>
     <p>Follow us on 
         <a href="https://www.facebook.com/onlinecakeshop0">Facebook</a> | 
-        <a href="https://www.instagram.com/online_cake_shop_/">Instagram</a>
+        <a href="https://www.instagram.com/online_cake_shop_/">Instagram</a> |
+        <a href="https://wa.me/9779742590718" target="_blank">+977 986-6804789</a>
     </p>
+    <p> Samakhusi, Kathmandu </p>
   </footer>
 
   <script>
@@ -206,7 +208,9 @@
     };
 
     const pricePerLb = {
-      "chocolate-cake": 300, // 300 NPR per lb
+      "chocolate": 100,  // 100 NPR per lb for chocolate cake
+      "black-forest": 120, // 120 NPR per lb for black forest cake
+      "strawberry": 110 // 110 NPR per lb for strawberry cake
     };
 
     function updateWeightOptions() {
@@ -216,52 +220,49 @@
       // Clear all options first
       weightSelect.innerHTML = '';
 
-      if (size === "small") {
-        // For single deck, allow any weight up to 3 lbs
-        addWeightOptions([1, 2]);
-      } else if (size === "medium") {
-        // For double deck, allow up to 3 lbs only
-        addWeightOptions([3, 4, 5]);
-      } else if (size === "large") {
-        // For triple deck, allow from 6 lbs and above
-        addWeightOptions([6, 7, 8, 9]);
-      }
-    }
+      let availableWeights;
 
-    function addWeightOptions(weights) {
-      const weightSelect = document.getElementById("weight");
-      weights.forEach(weight => {
+      if (size === "small") {
+        availableWeights = [1, 2];  // Single deck: 1 and 2 lbs
+      } else if (size === "medium") {
+        availableWeights = [3, 4, 5]; // Double deck: 3, 4, 5 lbs
+      } else if (size === "large") {
+        availableWeights = [6, 7, 8, 9]; // Triple deck: 6, 7, 8, 9 lbs
+      }
+
+      availableWeights.forEach(weight => {
         const option = document.createElement("option");
-        option.value = weight * 2.2; // Convert to lbs
+        option.value = weight; // Direct weight in lbs
         option.textContent = `${weight} lbs`;
         weightSelect.appendChild(option);
       });
+
+      updatePrice(); // Update the price when weight options change
     }
 
     function updatePrice() {
       const size = document.getElementById("size").value;
       const weightInLbs = parseFloat(document.getElementById("weight").value);
+      const cakeType = document.getElementById("cake-type").value;
       const sizePrice = pricePerSize[size];
-      const weightPrice = pricePerLb["black-forest-cake"] * weightInLbs;
+      const weightPrice = pricePerLb[cakeType] * weightInLbs;
       const totalPrice = sizePrice + weightPrice;
 
       document.getElementById("price").textContent = `Price: NPR ${totalPrice}`;
     }
 
-    document.getElementById("size").addEventListener("change", function() {
-      updateWeightOptions();
-      updatePrice();
-    });
-
+    document.getElementById("size").addEventListener("change", updateWeightOptions);
     document.getElementById("weight").addEventListener("change", updatePrice);
+    document.getElementById("cake-type").addEventListener("change", updatePrice);
 
     document.getElementById("order-form").addEventListener("submit", function(event) {
-      event.preventDefault();
+      event.preventDefault(); // Prevent default form submission
 
       // Disable submit button to prevent multiple submissions
       document.getElementById("submit-btn").disabled = true;
 
-      // Get values from the form
+      // Get form values
+      const cakeType = document.getElementById("cake-type").value;
       const size = document.getElementById("size").value;
       const weightInLbs = document.getElementById("weight").value;
       const message = document.getElementById("message").value;
@@ -269,10 +270,11 @@
       const deliveryTime = document.getElementById("delivery-time").value;
       const address = document.getElementById("address").value;
       const sizePrice = pricePerSize[size];
-      const weightPrice = pricePerLb["black-forest-cake"] * weightInLbs;
+      const weightPrice = pricePerLb[cakeType] * weightInLbs; // Price calculation based on cake type
       const totalPrice = sizePrice + weightPrice;
 
-      // Set order summary
+      // Display order summary
+      document.getElementById("summary-cake-type").textContent = cakeType.charAt(0).toUpperCase() + cakeType.slice(1).replace('-', ' ');
       document.getElementById("summary-size").textContent = size.charAt(0).toUpperCase() + size.slice(1);
       document.getElementById("summary-weight").textContent = `${weightInLbs} lbs`;
       document.getElementById("summary-message").textContent = message ? message : "No message.";
@@ -281,14 +283,13 @@
       document.getElementById("summary-address").textContent = address;
       document.getElementById("summary-price").textContent = `NPR ${totalPrice}`;
 
-      // Hide form and show summary
+      // Hide the form and show summary
       document.getElementById("order-form").classList.add("hidden");
       document.getElementById("order-summary").classList.remove("hidden");
     });
 
-    // Initialize the page
+    // Initialize
     updateWeightOptions();
-    updatePrice();
   </script>
 
 </body>
