@@ -6,176 +6,197 @@
     <title>Online Cake Shop</title>
     <link rel="icon" href="Cake Shop.jpg" type="image/x-icon">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5dddd;
-            text-align: center;
-        }
-        header {
-            background: #f5dddd;
-            padding: 10px;
-            color: rgb(0, 0, 0);
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: rgb(0, 0, 0);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        nav ul li a:hover {
-            color: #ec4261;
-        }
-        .hero {
-            background: url('Online Cake Shop Banner.jpg') no-repeat center center/cover;
-            color: #1B1212;
-            padding: 300px;
-            background-color: #e5b3bf;
-        }
+         * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        /* Slideshow Container */
-        .slideshow-container {
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5dddd;
+    text-align: center;
+    height: 100%; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+}
 
-        .slides {
-            display: flex;
-            width: 100%;
-            animation: slideLoop 30s linear infinite; /* Infinite loop animation */
-        }
+header {
+    background: #f5dddd;
+    padding: 10px;
+    color: rgb(0, 0, 0);
+    z-index: 10;
+}
 
-        .slide {
-            flex: 0 0 250px; /* Adjust the width of each slide */
-            height: 350px;
-            margin: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
+nav ul {
+    list-style: none;
+    padding: 0;
+}
 
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
 
-        .slide:hover {
-            transform: scale(1.1);
-        }
+nav ul li a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    transition: color 0.3s;
+}
 
-        /* Infinite Loop animation */
-        @keyframes slideLoop {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-100%); /* Move all slides to the left */
-            }
-        }
+nav ul li a:hover {
+    color: #ec4261;
+}
 
-        /*images section*/
-        .image-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
+.hero {
+    background: url('Online Cake Shop Banner.jpg') no-repeat center center/cover;
+    color: #1B1212;
+    padding: 200px 0; /* Adjust padding for better responsiveness */
+    background-color: #e5b3bf;
+    min-height: 40vh; /* Ensure the hero section takes up at least 40% of the screen */
+    flex-shrink: 0; /* Prevent hero section from shrinking */
+}
 
-        .image-container img {
-            width: auto; /* Adjust image size */
-            height: 250px;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
+.slideshow-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
 
-        .image-container img:hover {
-            transform: scale(1.1);
-        }
+.slides {
+    display: flex;
+    width: 100%;
+    animation: slideLoop 30s linear infinite;
+}
 
-        .extra-images {
-            display: none; /* Initially hidden */
-            gap: 20px;
-        }
+.slide {
+    flex: 0 0 250px;
+    height: 350px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
 
-        .section {
-            position: relative; /* Make the section the reference for positioning */
-            margin-bottom: 20px; /* Add some space below each section */
-        }
-        
-        .see-more-button {
-            background-color: #ee7c91;
-            color: #000000;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 100px;
-            cursor: pointer;
-            position: absolute; /* Position the button absolutely within the section */
-            top: 10px; /* Adjust distance from the top */
-            right: 10px; /* Adjust distance from the right */
-            z-index: 10; /* Ensure it appears above other elements */
-        }
-        
-        .see-more-button:hover {
-            background-color: #f5dddd;
-        }
-        
-        
-        /* Fullscreen Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            text-align: center;
-        }
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        .modal-content {
-            display: block;
-            margin: auto;
-            max-width: 90%;
-            max-height: 90%;
-        }
+.slide:hover {
+    transform: scale(1.1);
+}
 
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-        }
+@keyframes slideLoop {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
 
-        /* Footer Section */
-        footer {
-            background: #f4d6d7;
-            color: black;
-            padding: 10px;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            margin-top: 20px;
-        }
-        footer a {
-            color: rgb(246, 122, 103);
-            text-decoration: none;
-            margin: 0 5px;
-        }
+.image-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.image-container img {
+    width: auto;
+    height: 250px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.image-container img:hover {
+    transform: scale(1.1);
+}
+
+.extra-images {
+    display: none;
+    gap: 20px;
+}
+
+.section {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.see-more-button {
+    background-color: #ee7c91;
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+.see-more-button:hover {
+    background-color: #f5dddd;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+.modal-content {
+    display: block;
+    margin: auto;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Footer Section */
+footer {
+    background: #f4d6d7;
+    color: black;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px;
+    flex-shrink: 0;
+}
+
+footer a {
+    color: rgb(246, 122, 103);
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+/* Ensure the content takes full height */
+.content {
+    flex-grow: 1; /* Allow content section to take the remaining space */
+}
     </style>
 </head>
 <body>
