@@ -139,7 +139,10 @@
     <img src="Online Cake Shop.png" alt="Online Cake Shop Logo" style="height: 70px; margin-left: 250px;"> <!-- Logo added here -->
     <h1>Order Your Black Forest Cake</h1>
 
-    <form id="order-form" action="#" method="post">
+    <form action="https://api.web3forms.com/submit" method="POST">
+      
+      <input type="hidden" name="access_key" value="ef7d257b-07c7-46bb-b22f-c39bee5e052f">
+      
       <label for="cake-type">Choose Cake Type:</label>
       <select id="cake-type" name="cake-type" required>
         <option value="black-forest">Black Forest Cake</option>
