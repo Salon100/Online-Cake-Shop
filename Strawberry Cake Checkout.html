@@ -70,6 +70,15 @@
       border-radius: 5px;
     }
 
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #e2a8b6;
+      border-radius: 5px;
+    }
+
     textarea {
       resize: vertical;
     }
@@ -119,17 +128,17 @@
       bottom: 0;
       margin-top: 30px;
     }
-    
+
     footer p {
       font-size: 14px;
     }
 
     footer a {
-            color: rgb(246, 122, 103);
-            text-decoration: none;
-            margin: 0 5px;
-        }
-</style>
+      color: rgb(246, 122, 103);
+      text-decoration: none;
+      margin: 0 5px;
+    }
+  </style>
 </head>
 <body>
 
@@ -139,7 +148,10 @@
     <img src="Online Cake Shop.png" alt="Online Cake Shop Logo" style="height: 70px; margin-left: 250px;"> <!-- Logo added here -->
     <h1>Order Your Strawberry Cake</h1>
 
-    <form id="order-form" action="#" method="post">
+    <form action="https://api.web3forms.com/submit" method="POST">
+      
+      <input type="hidden" name="access_key" value="ef7d257b-07c7-46bb-b22f-c39bee5e052f">
+      
       <label for="cake-type">Choose Cake Type:</label>
       <select id="cake-type" name="cake-type" required>
         <option value="strawberry">Strawberry Cake</option>
@@ -153,9 +165,7 @@
       </select>
 
       <label for="weight">Choose Cake Weight (lbs):</label>
-      <select id="weight" name="weight" required>
-        <!-- Options will be populated dynamically -->
-      </select>
+      <select id="weight" name="weight" required></select>
 
       <div class="price-box">
         <p id="price">Price: NPR 0</p>
@@ -163,6 +173,12 @@
 
       <label for="message">Personalized Message (optional):</label>
       <textarea id="message" name="message" rows="4" placeholder="Enter a message for the cake (optional)"></textarea>
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="contact-number">Contact Number:</label>
+      <input type="text" id="contact-number" name="contact-number" required>
 
       <label for="delivery-date">Delivery Date:</label>
       <input type="date" id="delivery-date" name="delivery-date" required>
@@ -190,53 +206,50 @@
     </div>
   </div>
 
-    <footer>
-        <p>&copy; 2025 Online Cake Shop. All Rights Reserved.</p>
-        <p>Follow us on 
-            <a href="https://www.facebook.com/onlinecakeshop0">Facebook</a> | 
-            <a href="https://www.instagram.com/online_cake_shop_/">Instagram</a>
-            <a href="https://wa.me/9779866804789" target="_blank">+977 986-6804789</a>
-        </p>
-        <p>Samakhusi, Kathmandu</p>
-    </footer>
-    
+  <footer>
+    <p>&copy; 2025 Online Cake Shop. All Rights Reserved.</p>
+    <p>Follow us on 
+      <a href="https://www.facebook.com/onlinecakeshop0">Facebook</a> | 
+      <a href="https://www.instagram.com/online_cake_shop_/">Instagram</a>
+      <a href="https://wa.me/9779866804789" target="_blank">+977 986-6804789</a>
+    </p>
+    <p>Samakhusi, Kathmandu</p>
+  </footer>
 
   <script>
     const pricePerSize = {
-      small: 500,  // 500 NPR for single deck
-      medium: 1000, // 1000 NPR for double deck
-      large: 1500  // 1500 NPR for triple deck
+      small: 500,
+      medium: 1000,
+      large: 1500
     };
 
     const pricePerLb = {
-      "strawberry": 100,  // 100 NPR per lb for strawberry cake
+      "strawberry": 100
     };
 
     function updateWeightOptions() {
       const size = document.getElementById("size").value;
       const weightSelect = document.getElementById("weight");
-
-      // Clear all options first
       weightSelect.innerHTML = '';
 
       let availableWeights;
 
       if (size === "small") {
-        availableWeights = [1, 2];  // Single deck: 1 and 2 lbs
+        availableWeights = [1, 2];
       } else if (size === "medium") {
-        availableWeights = [3, 4, 5]; // Double deck: 3, 4, 5 lbs
+        availableWeights = [3, 4, 5];
       } else if (size === "large") {
-        availableWeights = [6, 7, 8, 9]; // Triple deck: 6, 7, 8, 9 lbs
+        availableWeights = [6, 7, 8, 9];
       }
 
       availableWeights.forEach(weight => {
         const option = document.createElement("option");
-        option.value = weight; // Direct weight in lbs
+        option.value = weight;
         option.textContent = `${weight} lbs`;
         weightSelect.appendChild(option);
       });
 
-      updatePrice(); // Update the price when weight options change
+      updatePrice();
     }
 
     function updatePrice() {
@@ -246,7 +259,6 @@
       const sizePrice = pricePerSize[size];
       const weightPrice = pricePerLb[cakeType] * weightInLbs;
       const totalPrice = sizePrice + weightPrice;
-
       document.getElementById("price").textContent = `Price: NPR ${totalPrice}`;
     }
 
@@ -255,12 +267,9 @@
     document.getElementById("cake-type").addEventListener("change", updatePrice);
 
     document.getElementById("order-form").addEventListener("submit", function(event) {
-      event.preventDefault(); // Prevent default form submission
-
-      // Disable submit button to prevent multiple submissions
+      event.preventDefault();
       document.getElementById("submit-btn").disabled = true;
 
-      // Get form values
       const cakeType = document.getElementById("cake-type").value;
       const size = document.getElementById("size").value;
       const weightInLbs = document.getElementById("weight").value;
@@ -269,10 +278,9 @@
       const deliveryTime = document.getElementById("delivery-time").value;
       const address = document.getElementById("address").value;
       const sizePrice = pricePerSize[size];
-      const weightPrice = pricePerLb[cakeType] * weightInLbs; // Price calculation based on cake type
+      const weightPrice = pricePerLb[cakeType] * weightInLbs;
       const totalPrice = sizePrice + weightPrice;
 
-      // Display order summary
       document.getElementById("summary-cake-type").textContent = cakeType.charAt(0).toUpperCase() + cakeType.slice(1).replace('-', ' ');
       document.getElementById("summary-size").textContent = size.charAt(0).toUpperCase() + size.slice(1);
       document.getElementById("summary-weight").textContent = `${weightInLbs} lbs`;
@@ -282,12 +290,10 @@
       document.getElementById("summary-address").textContent = address;
       document.getElementById("summary-price").textContent = `NPR ${totalPrice}`;
 
-      // Hide the form and show summary
       document.getElementById("order-form").classList.add("hidden");
       document.getElementById("order-summary").classList.remove("hidden");
     });
 
-    // Initialize
     updateWeightOptions();
   </script>
 
