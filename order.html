@@ -61,7 +61,7 @@
       color: #678ac2;
     }
 
-    select, input[type="date"], input[type="time"], textarea {
+    select, input[type="date"], input[type="time"], textarea, input[type="text"], input[type="tel"] {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -119,7 +119,7 @@
       bottom: 0;
       margin-top: 30px;
     }
-    
+
     footer p {
       font-size: 14px;
     }
@@ -130,16 +130,19 @@
       margin: 0 5px;
     }
   </style>
-  </head>
+</head>
 <body>
 
-  <a href="index.html" class="back-button">←</a>
+  <a href="CakeShopNepal.html" class="back-button">←</a>
 
   <div class="order-section">
     <img src="Online Cake Shop.png" alt="Online Cake Shop Logo" style="height: 70px; margin-left: 250px;">
     <h1>Order Your Cake</h1>
 
-    <form id="order-form" action="mailto:abc26@gmail.com" method="post" enctype="text/plain">
+    <form action="https://api.web3forms.com/submit" method="POST">
+      
+      <input type="hidden" name="access_key" value="ef7d257b-07c7-46bb-b22f-c39bee5e052f">
+
       <label for="cake-type">Choose Cake Type:</label>
       <select id="cake-type" name="cake-type" required>
         <option value="black-forest-cake">Black Forest Cake</option>
@@ -164,7 +167,7 @@
 
       <label for="weight">Choose Cake Weight (lbs):</label>
       <select id="weight" name="weight" required>
-        <!-- Weight options will be dynamically populated here -->
+        <!-- Weight options will be dynamically populated -->
       </select>
 
       <div class="price-box">
@@ -173,6 +176,13 @@
 
       <label for="message">Personalized Message (optional):</label>
       <textarea id="message" name="message" rows="4" placeholder="Enter a message for the cake (optional)"></textarea>
+
+      <!-- 👇 Added Fields -->
+      <label for="customer-name">Your Name:</label>
+      <input type="text" id="customer-name" name="customer-name" required placeholder="Enter your full name">
+
+      <label for="phone-number">Phone Number:</label>
+      <input type="tel" id="phone-number" name="phone-number" required placeholder="Enter your phone number">
 
       <label for="delivery-date">Delivery Date:</label>
       <input type="date" id="delivery-date" name="delivery-date" required>
@@ -201,14 +211,14 @@
   </div>
 
   <footer>
-        <p>&copy; 2025 Online Cake Shop. All Rights Reserved.</p>
-        <p>Follow us on 
-            <a href="https://www.facebook.com/onlinecakeshop0">Facebook</a> | 
-            <a href="https://www.instagram.com/online_cake_shop_/">Instagram</a> |
-            <a href="https://wa.me/9779866804789" target="_blank">+977 986-6804789</a>
-        </p>
-        <p>Samakhusi, Kathmandu</p>
-    </footer>
+    <p>&copy; 2025 Online Cake Shop. All Rights Reserved.</p>
+    <p>Follow us on 
+        <a href="https://www.facebook.com/onlinecakeshop0">Facebook</a> | 
+        <a href="https://www.instagram.com/online_cake_shop_/">Instagram</a> |
+        <a href="https://wa.me/9779866804789" target="_blank">+977 986-6804789</a>
+    </p>
+    <p>Samakhusi, Kathmandu</p>
+  </footer>
 
   <script>
     const pricePerSize = {
@@ -245,44 +255,37 @@
       "pineapple-cake": 300,
     };
 
-    // Function to update the available weight options based on size
     function updateWeightOptions() {
       const size = document.getElementById("size").value;
       const weightSelect = document.getElementById("weight");
-
-      // Clear all current options
       weightSelect.innerHTML = '';
-
       let availableWeights = [];
-      
+
       if (size === "small") {
-        availableWeights = [1, 2]; // Single deck only allows 1 and 2 lbs
+        availableWeights = [1, 2];
       } else if (size === "medium") {
-        availableWeights = [3, 4, 5]; // Double deck allows 3, 4, and 5 lbs
+        availableWeights = [3, 4, 5];
       } else if (size === "large") {
-        availableWeights = [6, 7, 9, 10]; // Triple deck allows 6, 7, 9, and 10 lbs
+        availableWeights = [6, 7, 9, 10];
       }
 
-      // Add available options to the weight select element
       availableWeights.forEach(weight => {
         const option = document.createElement("option");
-        option.value = weight * 2.2; // Convert to lbs
+        option.value = weight * 2.2;
         option.textContent = `${weight} lbs`;
         weightSelect.appendChild(option);
       });
 
-      updatePrice(); // Update price when weight changes
+      updatePrice();
     }
 
-    // Function to update price
     function updatePrice() {
       const size = document.getElementById("size").value;
       const weightInLbs = parseFloat(document.getElementById("weight").value);
       const cakeType = document.getElementById("cake-type").value;
 
       if (isNaN(weightInLbs) || !cakeType || !size) {
-        console.error("Invalid input detected.");
-        return; 
+        return;
       }
 
       const sizePrice = pricePerSize[size];
@@ -293,12 +296,10 @@
       document.getElementById("price").textContent = `Price: NPR ${totalPrice}`;
     }
 
-    // Event listeners for dynamic updates
     document.getElementById("size").addEventListener("change", updateWeightOptions);
     document.getElementById("weight").addEventListener("change", updatePrice);
     document.getElementById("cake-type").addEventListener("change", updatePrice);
 
-    // Form submission and order summary display
     document.getElementById("order-form").addEventListener("submit", function(event) {
       event.preventDefault();
       document.getElementById("submit-btn").disabled = true;
@@ -329,7 +330,6 @@
       document.getElementById("order-summary").classList.remove("hidden");
     });
 
-    // Initialize the page
     updateWeightOptions();
     updatePrice();
   </script>
